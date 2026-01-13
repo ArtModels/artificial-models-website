@@ -135,10 +135,19 @@
     <!-- 1. Barra de Navegación Superior (Navbar) -->
     <nav
         class="fixed top-6 left-6 right-6 z-50 p-6 flex justify-between items-center bg-black bg-opacity-30 backdrop-blur-custom rounded-full ui-fade-in border border-white/30">
-        <!-- Contenedor izquierdo (ocupa el mismo espacio que los botones de la derecha para centrar los enlaces) -->
-        <div class="flex-1"></div>
-        <!-- Enlaces de Navegación -->
-        <div id="nav-links" class="flex space-x-8 text-lg font-semibold">
+
+        <!-- Botón de Menú Hamburguesa (Visible solo en móvil) -->
+        <div class="flex-1 md:hidden">
+            <button id="mobile-menu-open" class="text-white hover:text-cyan-400 transition-colors">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Contenedor izquierdo (ocupa el mismo espacio que los botones de la derecha para centrar los enlaces) - Visible solo escritorio -->
+        <div class="hidden md:block flex-1"></div>
+
+        <!-- Enlaces de Navegación (Visible solo escritorio) -->
+        <div id="nav-links" class="hidden md:flex space-x-8 text-lg font-semibold">
             <a href="#" class="hover:text-cyan-400 transition-colors" data-key="home">INICIO</a>
             <a href="#about" class="hover:text-cyan-400 transition-colors" data-key="about">NOSOTROS</a>
             <a href="#gallery" class="hover:text-cyan-400 transition-colors" data-key="gallery">CURSOS</a>
@@ -146,21 +155,38 @@
         </div>
 
         <!-- Botones de Acción y Selector de Idioma -->
-        <div class="flex flex-1 justify-end items-center space-x-6">
+        <div class="flex flex-1 justify-end items-center space-x-3 md:space-x-6">
             <!-- Selector de Idioma -->
             <div class="flex space-x-2 text-sm font-semibold">
                 <button id="btn-es" class="px-3 py-1 rounded-full bg-white text-black transition-colors">ES</button>
                 <button id="btn-en"
                     class="px-3 py-1 rounded-full text-white hover:bg-white/20 transition-colors">EN</button>
             </div>
-            <!-- Botón de Acción -->
+            <!-- Botón de Acción (Oculto en móvil muy pequeño si se desea, pero aquí lo dejamos) -->
             <a href="#contact" id="contact-btn-nav"
-                class="px-6 py-2 border border-white rounded-full text-lg hover:bg-white hover:text-black transition-colors"
+                class="hidden md:inline-block px-6 py-2 border border-white rounded-full text-lg hover:bg-white hover:text-black transition-colors"
                 data-key="contact">
                 Contáctanos
             </a>
         </div>
     </nav>
+
+    <!-- Menu Móvil Overlay (Pantalla completa) -->
+    <div id="mobile-menu-overlay"
+        class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center">
+        <button id="mobile-menu-close" class="absolute top-8 right-8 text-white hover:text-cyan-400 transition-colors">
+            <i class="fas fa-times text-4xl"></i>
+        </button>
+
+        <div class="flex flex-col space-y-8 text-center text-2xl font-bold">
+            <a href="#" class="mobile-link hover:text-cyan-400 transition-colors" data-key="home">INICIO</a>
+            <a href="#about" class="mobile-link hover:text-cyan-400 transition-colors" data-key="about">NOSOTROS</a>
+            <a href="#gallery" class="mobile-link hover:text-cyan-400 transition-colors" data-key="gallery">CURSOS</a>
+            <a href="#products" class="mobile-link hover:text-cyan-400 transition-colors"
+                data-key="products">PRODUCTOS</a>
+            <a href="#contact" class="mobile-link hover:text-cyan-400 transition-colors" data-key="contact">CONTACTO</a>
+        </div>
+    </div>
 
     <!-- 2. Contenedor del Video de Fondo (Fijo y a pantalla completa) -->
     <div class="video-container">
@@ -855,10 +881,31 @@
             startAutoSlide();
         }
 
-    </script>
-</body>
+        // -----------------------------------------------------------
+        // MENU MOVIL
+        // -----------------------------------------------------------
+        const mobileMenuOpenBtn = document.getElementById('mobile-menu-open');
+        const mobileMenuCloseBtn = document.getElementById('mobile-menu-close');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
 
-</html>
+        if (mobileMenuOpenBtn && mobileMenuCloseBtn && mobileMenuOverlay) {
+            mobileMenuOpenBtn.addEventListener('click', () => {
+                mobileMenuOverlay.classList.remove('translate-x-full');
+            });
+
+            mobileMenuCloseBtn.addEventListener('click', () => {
+                mobileMenuOverlay.classList.add('translate-x-full');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenuOverlay.classList.add('translate-x-full');
+                });
+            });
+        }
+
+    </script>
 </body>
 
 </html>
