@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="overflow-x-hidden">
 
 <head>
     <meta charset="UTF-8">
@@ -45,10 +45,9 @@
         /* Estilo para el elemento VIDEO nativo */
         #bg-video {
             /* Esto asegura que el video cubra completamente el contenedor manteniendo el aspecto */
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -73,11 +72,6 @@
         .content-overlay {
             position: fixed;
             z-index: 10;
-            /* Posicionamiento: 100px desde la izquierda y 150px desde abajo */
-            left: 5rem;
-            /* 5 * 4 = 20px */
-            bottom: 9.375rem;
-            /* 150px (cerca de la barra inferior) */
         }
 
         /* Estilos para el icono de mouse de scroll */
@@ -190,7 +184,7 @@
 
     <!-- 2. Contenedor del Video de Fondo (Fijo y a pantalla completa) -->
     <div class="video-container">
-        <video id="bg-video" muted playsinline preload="auto">
+        <video id="bg-video" autoplay loop muted playsinline preload="auto">
             <!-- Videos de ejemplo, reemplaza con tu video local o URL -->
             <source src="/02.mp4" type="video/mp4">
             <!-- source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm" -->
@@ -199,23 +193,25 @@
         </video>
 
         <!-- Capa de Oscurecimiento para mejorar la lectura del texto -->
-        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <div class="absolute inset-0 bg-black opacity-40"></div>
     </div>
 
     <!-- 3. Contenido de Texto Principal (Fijo sobre el Video) -->
-    <div class="content-overlay ui-fade-in">
+    <div
+        class="content-overlay ui-fade-in w-[90%] left-1/2 bottom-[15%] -translate-x-1/2 text-center md:text-left md:w-auto md:left-[5rem] md:bottom-[9.375rem] md:transform-none">
         <!-- 3.1. Logo de la Marca -->
-        <img src="/Logo.svg" alt="Artificial Models Logo" class="h-[160px] mb-4 opacity-75">
+        <img src="/Logo.svg" alt="Artificial Models Logo"
+            class="w-[140px] md:w-auto md:h-[160px] mx-auto md:mx-0 mb-4 opacity-75">
         <!-- Usa valores arbitrarios como h-[100px] para un control preciso -->
 
-        <h1 class="text-6xl md:text-8xl tracking-tight mb-4 drop-shadow-lg text-white"
+        <h1 class="text-4xl sm:text-6xl md:text-8xl tracking-tight mb-4 drop-shadow-lg text-white"
             style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
             <!-- Se ajusta el texto para que esté en dos líneas y con diferentes grosores de fuente -->
             <span class="font-normal">Artificial</span>
             <br>
             <span class="font-extrabold">Models</span>
         </h1>
-        <p id="hero-subtitle" class="text-xl md:text-3xl max-w-3xl drop-shadow-lg"
+        <p id="hero-subtitle" class="text-base sm:text-xl md:text-3xl max-w-3xl drop-shadow-lg mx-auto md:mx-0"
             style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" data-key="hero_subtitle">
             DESCUBRE ARTE DIGITAL Y PRODUCTOS DE IA
         </p>
@@ -238,7 +234,7 @@
                 <div class="text-left">
                     <p class="text-sm md:text-base font-bold tracking-widest text-[#00FFFF] mb-4 uppercase"
                         data-key="about_subtitle">EL FUTURO ES AHORA</p>
-                    <h2 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-8 text-white drop-shadow-lg leading-tight"
+                    <h2 class="text-4xl md:text-7xl font-extrabold tracking-tight mb-8 text-white drop-shadow-lg leading-tight"
                         data-key="about_heading">
                         Transformamos la<br>creatividad con<br><span
                             class="text-[#00FFFF] drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]">Inteligencia
@@ -301,7 +297,7 @@
         <div id="gallery"
             class="min-h-screen flex flex-col justify-center p-8 pt-32 bg-gray-900 text-white relative z-20">
             <div class="w-full px-4 md:px-16 mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold mb-6 text-left text-white" data-key="offer_title">Oferta <span
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 text-left text-white" data-key="offer_title">Oferta <span
                         class="text-[#00FFFF] drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]">Académica</span></h2>
                 <p class="text-xl md:text-2xl text-gray-300 leading-relaxed font-light text-left max-w-4xl"
                     data-key="offer_desc">
@@ -380,12 +376,12 @@
             <div class="absolute inset-0 bg-black/60 z-0"></div>
 
             <div class="w-full px-4 md:px-16 mb-16 text-left relative z-10">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4" data-key="tools_title">Herramientas & <span
-                        class="text-[#00FFFF] drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]"">Apps</span></h2>
+                <h2 class="text-3xl md:text-5xl font-bold mb-4" data-key="tools_title">Herramientas & <span
+                        class="text-[#00FFFF] drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]">Apps</span></h2>
                 <p class=" text-xl text-gray-300 font-light max-w-2xl" data-key="tools_desc">
-                        Estamos desarrollando aplicaciones potenciadas por IA para simplificar y potenciar tu flujo de
-                        trabajo.
-                        </p>
+                    Estamos desarrollando aplicaciones potenciadas por IA para simplificar y potenciar tu flujo de
+                    trabajo.
+                </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl w-full mx-auto relative z-10">
@@ -450,58 +446,96 @@
 
 
         <!-- Sección de Contenido Final (Con Fondo Sólido para terminar el efecto) -->
-        <div id="contact" class="min-h-screen bg-gray-900 p-10 flex flex-col items-center justify-center">
-            <h2 class="text-5xl font-extrabold mb-4 text-center text-cyan-400" data-key="contact_title">Contáctanos</h2>
-            <form id="contact-form" class="w-full max-w-2xl">
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
-                            for="grid-first-name" data-key="form_name">Nombre</label>
-                        <input
-                            class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-cyan-500"
-                            id="grid-first-name" type="text" name="name" placeholder="Pedro" required>
-                        <p class="text-red-500 text-xs italic hidden">Por favor, rellena este campo.</p>
-                    </div>
-                    <div class="w-full md:w-1/2 px-3">
-                        <label class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
-                            for="grid-email" data-key="form_email">Correo</label>
-                        <input
-                            class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-gray-700 focus:border-cyan-500"
-                            id="grid-email" type="email" name="email" placeholder="pedro@example.com" required>
+        <div id="contact" class="min-h-screen bg-gray-900 p-6 md:p-10 flex items-center justify-center">
+            <div
+                class="w-full max-w-6xl mx-auto flex flex-col md:flex-row items-center md:items-start justify-between gap-12">
+
+                <!-- Columna Izquierda: Textos e Info -->
+                <div class="w-full md:w-1/2 flex flex-col mt-4 md:mt-12 text-left">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 text-white tracking-tight"
+                        data-key="contact_title">Contáctanos</h2>
+                    <p class="text-gray-400 mb-12 text-lg leading-relaxed max-w-lg" data-key="contact_subtitle">
+                        ¿Listo para transformar tu flujo de trabajo con Inteligencia Artificial?<br>
+                        Escríbenos y descubre cómo podemos ayudarte.
+                    </p>
+
+                    <div class="flex flex-col gap-8">
+                        <!-- Info Item 1 -->
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#181A1B] flex items-center justify-center border border-gray-800 shadow-sm">
+                                <i class="fas fa-envelope text-[#00FFFF] text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold mb-1">Email</p>
+                                <p class="text-white font-medium">artmodels.ai@gmail.com</p>
+                            </div>
+                        </div>
+                        <!-- Info Item 2 -->
+                        <div class="flex items-center gap-5">
+                            <div
+                                class="w-12 h-12 rounded-full bg-[#181A1B] flex items-center justify-center border border-gray-800 shadow-sm">
+                                <i class="fas fa-phone-alt text-[#00FFFF] text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold mb-1">Teléfono</p>
+                                <p class="text-white font-medium">(33) 1439-71-55</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
-                            for="grid-subject" data-key="form_subject">Asunto</label>
-                        <input
-                            class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-cyan-500"
-                            id="grid-subject" type="text" name="title" placeholder="Interesado en tus productos de IA"
-                            required>
+
+                <!-- Columna Derecha: Formulario -->
+                <div class="w-full md:w-1/2 bg-[#0C0D0E] p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-800">
+                    <form id="contact-form" class="w-full flex flex-col gap-6">
+                        <div class="flex flex-col md:flex-row gap-6">
+                            <div class="w-full md:w-1/2 flex flex-col">
+                                <label class="text-gray-400 text-sm font-semibold mb-2" for="grid-first-name"
+                                    data-key="form_name">Nombre</label>
+                                <input
+                                    class="w-full bg-[#181A1B] text-gray-300 border border-transparent rounded-lg py-3.5 px-4 focus:outline-none focus:border-[#00FFFF] transition-colors"
+                                    id="grid-first-name" type="text" name="name" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="w-full md:w-1/2 flex flex-col">
+                                <label class="text-gray-400 text-sm font-semibold mb-2" for="grid-email">Email</label>
+                                <input
+                                    class="w-full bg-[#181A1B] text-gray-300 border border-transparent rounded-lg py-3.5 px-4 focus:outline-none focus:border-[#00FFFF] transition-colors"
+                                    id="grid-email" type="email" name="email" placeholder="tu@email.com" required>
+                            </div>
+                        </div>
+
+                        <!-- Elemento Asunto reintegrado visiblemente a petición de Usuario -->
+                        <div class="flex flex-col mt-2">
+                            <label class="text-gray-400 text-sm font-semibold mb-2" for="grid-subject"
+                                data-key="form_subject">Asunto</label>
+                            <input
+                                class="w-full bg-[#181A1B] text-gray-300 border border-transparent rounded-lg py-3.5 px-4 focus:outline-none focus:border-[#00FFFF] transition-colors"
+                                id="grid-subject" type="text" name="title" placeholder="¿Cómo podemos ayudarte?"
+                                required>
+                        </div>
+
+                        <div class="flex flex-col mt-2">
+                            <label class="text-gray-400 text-sm font-semibold mb-2" for="grid-message"
+                                data-key="form_message">Mensaje</label>
+                            <textarea
+                                class="w-full bg-[#181A1B] text-gray-300 border border-transparent rounded-lg py-3.5 px-4 h-32 focus:outline-none focus:border-[#00FFFF] transition-colors resize-none"
+                                id="grid-message" name="message" placeholder="Danos más detalles..."
+                                required></textarea>
+                        </div>
+
+                        <button id="submit-btn"
+                            class="w-full bg-[#00FFFF] text-black font-bold text-lg py-4 rounded-lg mt-4 hover:bg-cyan-300 transition-colors shadow-lg shadow-[#00FFFF]/20"
+                            type="submit" data-key="form_btn">
+                            Enviar Mensaje
+                        </button>
+                    </form>
+
+                    <div id="success-message"
+                        class="text-center mt-6 text-[#00FFFF] font-semibold opacity-0 transition-opacity duration-500"
+                        data-key="form_success">
+                        <i class="fas fa-check-circle"></i> ¡Mensaje enviado con éxito!
                     </div>
                 </div>
-                <div class="flex flex-wrap -mx-3 mb-6">
-                    <div class="w-full px-3">
-                        <label class="block uppercase tracking-wide text-gray-400 text-xs font-bold mb-2"
-                            for="grid-message" data-key="form_message">Mensaje</label>
-                        <textarea
-                            class="appearance-none block w-full bg-gray-800 text-white border border-gray-700 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-gray-700 focus:border-cyan-500 h-48 resize-none"
-                            id="grid-message" name="message" required></textarea>
-                    </div>
-                </div>
-                <div class="flex justify-center">
-                    <button id="submit-btn"
-                        class="px-8 py-3 border border-cyan-400 text-cyan-400 text-xl font-bold rounded-full hover:bg-cyan-400 hover:text-black transition-colors"
-                        type="submit" data-key="form_btn">
-                        Enviar Mensaje
-                    </button>
-                </div>
-            </form>
-            <!-- Mensaje de éxito -->
-            <div id="success-message"
-                class="text-center mt-6 text-emerald-400 font-semibold opacity-0 transition-opacity duration-500"
-                data-key="form_success">
-                <i class="fas fa-check-circle"></i> ¡Mensaje enviado con éxito!
             </div>
         </div>
 
@@ -685,6 +719,7 @@
                 gallery: "CURSOS",
                 products: "PRODUCTOS",
                 contact: "Contáctanos",
+                contact_subtitle: "¿Listo para transformar tu flujo de trabajo con Inteligencia Artificial?<br>Escríbenos y descubre cómo podemos ayudarte.",
                 hero_subtitle: "DESCUBRE ARTE DIGITAL Y PRODUCTOS DE IA",
                 about_subtitle: "EL FUTURO ES AHORA",
                 about_heading: 'Transformamos la<br>creatividad con<br><span class="text-[#00FFFF] drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]">Inteligencia Artificial</span>',
@@ -727,6 +762,7 @@
                 gallery: "COURSES",
                 products: "PRODUCTS",
                 contact: "Contact Us",
+                contact_subtitle: "Ready to transform your workflow with Artificial Intelligence?<br>Write to us and discover how we can help you.",
                 hero_subtitle: "DISCOVER DIGITAL ART AND IA PRODUCTS",
                 about_subtitle: "THE FUTURE IS NOW",
                 about_heading: 'Transforming<br>creativity with<br><span class="text-[#00FFFF] drop-shadow-[0_0_15px_rgba(0,255,255,0.6)]">Artificial Intelligence</span>',
@@ -817,14 +853,14 @@
                     successMessage.style.opacity = '1';
                     successMessage.innerText = '¡Mensaje enviado con éxito!';
                     successMessage.classList.remove('text-red-500');
-                    successMessage.classList.add('text-emerald-400');
+                    successMessage.classList.add('text-[#00FFFF]');
                     contactForm.reset();
                     setTimeout(() => { successMessage.style.opacity = '0'; }, 4000);
                 }, (err) => {
                     submitBtn.innerText = 'Enviar Mensaje';
                     successMessage.style.opacity = '1';
                     successMessage.innerText = 'Error al enviar. Intenta de nuevo.';
-                    successMessage.classList.remove('text-emerald-400');
+                    successMessage.classList.remove('text-[#00FFFF]');
                     successMessage.classList.add('text-red-500');
                     console.error('FAILED...', err);
                 });
