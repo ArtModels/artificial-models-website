@@ -165,20 +165,23 @@
         </div>
     </nav>
 
-    <!-- Menu Móvil Overlay (Pantalla completa) -->
     <div id="mobile-menu-overlay"
-        class="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl transform translate-x-full transition-transform duration-300 flex flex-col items-center justify-center">
-        <button id="mobile-menu-close" class="absolute top-8 right-8 text-white hover:text-cyan-400 transition-colors">
+        class="fixed inset-0 z-[60] bg-black/40 backdrop-blur-[20px] transform translate-x-full transition-transform duration-500 flex flex-col items-center justify-center overflow-hidden">
+        
+        <!-- Decorative Glow Effects -->
+        <div class="absolute bottom-[-10%] left-[-10%] w-[70%] h-[50%] bg-cyan-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[40%] bg-blue-600/10 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <button id="mobile-menu-close" class="absolute top-8 right-8 text-white hover:text-cyan-400 transition-colors z-10">
             <i class="fas fa-times text-4xl"></i>
         </button>
 
-        <div class="flex flex-col space-y-8 text-center text-2xl font-bold">
-            <a href="#" class="mobile-link hover:text-cyan-400 transition-colors" data-key="home">INICIO</a>
-            <a href="#about" class="mobile-link hover:text-cyan-400 transition-colors" data-key="about">NOSOTROS</a>
-            <a href="#gallery" class="mobile-link hover:text-cyan-400 transition-colors" data-key="gallery">CURSOS</a>
-            <a href="#products" class="mobile-link hover:text-cyan-400 transition-colors"
-                data-key="products">PRODUCTOS</a>
-            <a href="#contact" class="mobile-link hover:text-cyan-400 transition-colors" data-key="contact">CONTACTO</a>
+        <div class="relative z-10 flex flex-col space-y-10 text-center text-3xl font-bold tracking-tight">
+            <a href="#" class="mobile-link text-white hover:text-cyan-400 transition-all duration-300 transform hover:scale-110" data-key="home">INICIO</a>
+            <a href="#about" class="mobile-link text-white hover:text-cyan-400 transition-all duration-300 transform hover:scale-110" data-key="about">NOSOTROS</a>
+            <a href="#gallery" class="mobile-link text-white hover:text-cyan-400 transition-all duration-300 transform hover:scale-110" data-key="gallery">CURSOS</a>
+            <a href="#products" class="mobile-link text-white hover:text-cyan-400 transition-all duration-300 transform hover:scale-110" data-key="products">PRODUCTOS</a>
+            <a href="#contact" class="mobile-link text-white hover:text-cyan-400 transition-all duration-300 transform hover:scale-110" data-key="contact">CONTACTO</a>
         </div>
     </div>
 
