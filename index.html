@@ -187,7 +187,7 @@
 
     <!-- 2. Contenedor del Video de Fondo (Fijo y a pantalla completa) -->
     <div class="video-container">
-        <video id="bg-video" autoplay loop muted playsinline preload="auto">
+        <video id="bg-video" muted playsinline preload="auto">
             <!-- Videos de ejemplo, reemplaza con tu video local o URL -->
             <source src="/02.webm" type="video/webm">
             <!-- source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm" -->
@@ -652,25 +652,29 @@
             console.log('Video cargado. Duración:', videoDuration, 'segundos. Scroll Máximo:', scrollMax);
         }
 
-        // 5. La Función principal de "Scrubbing"
+        // 5. La Función principal de "Scrubbing" con requestAnimationFrame para mayor fluidez
+        let isScrubbing = false;
         function handleScroll() {
-            // FIX: Añadimos una comprobación para asegurar que scrollMax sea un valor positivo.
             if (!isVideoReady || videoDuration === 0 || scrollMax <= 0) return;
 
-            const scrollY = window.scrollY;
+            if (!isScrubbing) {
+                isScrubbing = true;
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
 
-            // Calcular el progreso del scroll de 0 a 1
-            let scrollProgress = scrollY / scrollMax;
+                    // Calcular el progreso del scroll de 0 a 1
+                    let scrollProgress = scrollY / scrollMax;
 
-            // Limitar el progreso entre 0 y 1
-            if (scrollProgress < 0) scrollProgress = 0;
-            if (scrollProgress > 1) scrollProgress = 1;
+                    // Límites conservadores (0.01 y 0.99) para asegurar que el video nunca
+                    // toque los extremos absolutos y genere saltos por redondeos del navegador
+                    if (scrollProgress < 0.01) scrollProgress = 0.01;
+                    if (scrollProgress > 0.99) scrollProgress = 0.99;
 
-            // Mapear el progreso del scroll al tiempo del video
-            const newTime = scrollProgress * videoDuration;
-
-            // Asignar el nuevo tiempo al video
-            video.currentTime = newTime;
+                    // Asignar el nuevo tiempo al video de forma fluida
+                    video.currentTime = scrollProgress * videoDuration;
+                    isScrubbing = false;
+                });
+            }
         }
 
         // --- LÓGICA DE APARICIÓN DE LA UI Y DESAPARICIÓN DEL MOUSE ---
