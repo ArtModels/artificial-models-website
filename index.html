@@ -166,7 +166,7 @@
     </nav>
 
     <div id="mobile-menu-overlay"
-        class="fixed inset-0 z-[60] bg-black/40 backdrop-blur-[20px] transform translate-x-full transition-transform duration-500 flex flex-col items-center justify-center overflow-hidden">
+        class="fixed inset-0 z-[60] bg-black/40 backdrop-blur-[20px] transform -translate-x-full transition-transform duration-500 flex flex-col items-center justify-center overflow-hidden">
         
         <!-- Decorative Glow Effects -->
         <div class="absolute bottom-[-10%] left-[-10%] w-[70%] h-[50%] bg-cyan-600/20 rounded-full blur-[120px] pointer-events-none"></div>
@@ -187,9 +187,9 @@
 
     <!-- 2. Contenedor del Video de Fondo (Fijo y a pantalla completa) -->
     <div class="video-container">
-        <video id="bg-video" autoplay loop muted playsinline preload="auto">
+        <video id="bg-video" muted playsinline preload="auto">
             <!-- Videos de ejemplo, reemplaza con tu video local o URL -->
-            <source src="/02.mp4" type="video/mp4">
+            <source src="/02.webm" type="video/webm">
             <!-- source src="http://techslides.com/demos/sample-videos/small.webm" type="video/webm" -->
 
             Tu navegador no soporta la etiqueta de video.
@@ -207,7 +207,7 @@
             class="w-[140px] md:w-auto md:h-[160px] mx-auto md:mx-0 mb-4 opacity-75">
         <!-- Usa valores arbitrarios como h-[100px] para un control preciso -->
 
-        <h1 class="text-4xl sm:text-6xl md:text-8xl tracking-tight mb-4 drop-shadow-lg text-white"
+        <h1 class="text-[3.375rem] sm:text-[5.875rem] md:text-[9.25rem] leading-[0.8] tracking-tight mb-4 drop-shadow-lg text-white"
             style="text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
             <!-- Se ajusta el texto para que esté en dos líneas y con diferentes grosores de fuente -->
             <span class="font-normal">Artificial</span>
@@ -652,25 +652,29 @@
             console.log('Video cargado. Duración:', videoDuration, 'segundos. Scroll Máximo:', scrollMax);
         }
 
-        // 5. La Función principal de "Scrubbing"
+        // 5. La Función principal de "Scrubbing" con requestAnimationFrame para mayor fluidez
+        let isScrubbing = false;
         function handleScroll() {
-            // FIX: Añadimos una comprobación para asegurar que scrollMax sea un valor positivo.
             if (!isVideoReady || videoDuration === 0 || scrollMax <= 0) return;
 
-            const scrollY = window.scrollY;
+            if (!isScrubbing) {
+                isScrubbing = true;
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
 
-            // Calcular el progreso del scroll de 0 a 1
-            let scrollProgress = scrollY / scrollMax;
+                    // Calcular el progreso del scroll de 0 a 1
+                    let scrollProgress = scrollY / scrollMax;
 
-            // Limitar el progreso entre 0 y 1
-            if (scrollProgress < 0) scrollProgress = 0;
-            if (scrollProgress > 1) scrollProgress = 1;
+                    // Límites conservadores (0.01 y 0.99) para asegurar que el video nunca
+                    // toque los extremos absolutos y genere saltos por redondeos del navegador
+                    if (scrollProgress < 0.01) scrollProgress = 0.01;
+                    if (scrollProgress > 0.99) scrollProgress = 0.99;
 
-            // Mapear el progreso del scroll al tiempo del video
-            const newTime = scrollProgress * videoDuration;
-
-            // Asignar el nuevo tiempo al video
-            video.currentTime = newTime;
+                    // Asignar el nuevo tiempo al video de forma fluida
+                    video.currentTime = scrollProgress * videoDuration;
+                    isScrubbing = false;
+                });
+            }
         }
 
         // --- LÓGICA DE APARICIÓN DE LA UI Y DESAPARICIÓN DEL MOUSE ---
@@ -930,16 +934,16 @@
 
         if (mobileMenuOpenBtn && mobileMenuCloseBtn && mobileMenuOverlay) {
             mobileMenuOpenBtn.addEventListener('click', () => {
-                mobileMenuOverlay.classList.remove('translate-x-full');
+                mobileMenuOverlay.classList.remove('-translate-x-full');
             });
 
             mobileMenuCloseBtn.addEventListener('click', () => {
-                mobileMenuOverlay.classList.add('translate-x-full');
+                mobileMenuOverlay.classList.add('-translate-x-full');
             });
 
             mobileLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    mobileMenuOverlay.classList.add('translate-x-full');
+                    mobileMenuOverlay.classList.add('-translate-x-full');
                 });
             });
         }
